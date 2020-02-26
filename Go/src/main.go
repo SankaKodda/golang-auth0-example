@@ -18,4 +18,13 @@ func main() {
 		}
 	})
 	r.GET("/todo", handlers.GetTodoListHandler)
+	r.GET("/todo", handlers.GetTodoListHandler)
+	r.POST("/todo", handlers.AddTodoHandler)
+	r.DELETE("/todo/:id", handlers.DeleteTodoHandler)
+	r.PUT("/todo", handlers.CompleteTodoHandler)
+
+	err := r.Run(":3000")
+	if err != nil {
+		panic(err)
+	}
 }
