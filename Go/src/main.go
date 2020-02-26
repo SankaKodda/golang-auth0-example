@@ -1,6 +1,7 @@
-package main
+package handlers
 
 import (
+	handlers "github.com/SankaKodippily/golang-auth0-example/Go/src"
 	"github.com/gin-gonic/gin"
 	"path"
 	"path/filepath"
