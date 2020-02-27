@@ -1,9 +1,10 @@
-package handlers
+package todo
 
 import (
 	"errors"
-	"github.com/rs/xid"
 	"sync"
+
+	"github.com/rs/xid"
 )
 
 var (
@@ -20,16 +21,19 @@ func initialiseList() {
 	list = []Todo{}
 }
 
+// Todo data structure for a task with a description of what to do
 type Todo struct {
 	ID       string `json:"id"`
 	Message  string `json:"message"`
 	Complete bool   `json:"complete"`
-
 }
 
+// Get retrieves all elements from the todo list
 func Get() []Todo {
 	return list
 }
+
+// Add will add a new todo based on a message
 func Add(message string) string {
 	t := newTodo(message)
 	mtx.Lock()
@@ -37,6 +41,8 @@ func Add(message string) string {
 	mtx.Unlock()
 	return t.ID
 }
+
+// Delete will remove a Todo from the Todo list
 func Delete(id string) error {
 	location, err := findTodoLocation(id)
 	if err != nil {
@@ -46,12 +52,9 @@ func Delete(id string) error {
 	return nil
 }
 
-func removeElementByLocation(i int) {
-	mtx.Lock()
-	list = append(list[:i], list[i+1:]...)
-	mtx.Unlock()
-}
-func complete(id string) error {
+// Complete will set the complete boolean to true, marking a todo as
+// completed
+func Complete(id string) error {
 	location, err := findTodoLocation(id)
 	if err != nil {
 		return err
@@ -60,10 +63,12 @@ func complete(id string) error {
 	return nil
 }
 
-func setTodoCompleteByLocation(location int) {
-	mtx.Lock()
-	list[location].Complete = true
-	mtx.Unlock()
+func newTodo(msg string) Todo {
+	return Todo{
+		ID:       xid.New().String(),
+		Message:  msg,
+		Complete: false,
+	}
 }
 
 func findTodoLocation(id string) (int, error) {
@@ -74,18 +79,21 @@ func findTodoLocation(id string) (int, error) {
 			return i, nil
 		}
 	}
-	return 0, errors.New("Could not Find todo based on id")
+	return 0, errors.New("could not find todo based on id")
+}
+
+func removeElementByLocation(i int) {
+	mtx.Lock()
+	list = append(list[:i], list[i+1:]...)
+	mtx.Unlock()
+}
+
+func setTodoCompleteByLocation(location int) {
+	mtx.Lock()
+	list[location].Complete = true
+	mtx.Unlock()
 }
 
 func isMatchingID(a string, b string) bool {
 	return a == b
-
-}
-
-func newTodo(msg string) Todo {
-	return Todo{
-		ID:       xid.New().String(),
-		Message:  msg,
-		Complete: false,
-	}
 }

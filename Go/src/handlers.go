@@ -5,7 +5,7 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
-	todo "github.com/SankaKodippily/golang-auth0-example/Go/src/"
+    todo "github.com/SankaKodippily/golang-auth0-example/Go/src"
 	"github.com/gin-gonic/gin"
 )
 

@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	handlers "github.com/SankaKodippily/golang-auth0-example/Go/src"
+	//handler "github.com/SankaKodippily/golang-auth0-example/Go/src"
 	"github.com/gin-gonic/gin"
 	"path"
 	"path/filepath"
@@ -18,11 +18,11 @@ func main() {
 			c.File("./ui/dist/ui/"+path.Join(dir,file))
 		}
 	})
-	r.GET("/todo", handlers.GetTodoListHandler)
-	r.GET("/todo", handlers.GetTodoListHandler)
-	r.POST("/todo", handlers.AddTodoHandler)
-	r.DELETE("/todo/:id", handlers.DeleteTodoHandler)
-	r.PUT("/todo", handlers.CompleteTodoHandler)
+	r.GET("/todo", GetTodoListHandler)
+	r.GET("/todo", GetTodoListHandler)
+	r.POST("/todo", AddTodoHandler)
+	r.DELETE("/todo/:id", DeleteTodoHandler)
+	r.PUT("/todo", CompleteTodoHandler)
 
 	err := r.Run(":3000")
 	if err != nil {
