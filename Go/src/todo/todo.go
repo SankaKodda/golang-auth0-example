@@ -3,7 +3,6 @@ package todo
 import (
 	"errors"
 	"sync"
-
 	"github.com/rs/xid"
 )
 
