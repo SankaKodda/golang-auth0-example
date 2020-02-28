@@ -1,17 +1,20 @@
 package main
 
 import (
-
-	"os"
-	//"gopkg.in/square/go-jose.v2"
-	/*"log"
+	"github.com/auth0-community/go-auth0"
+	"gopkg.in/square/go-jose.v2"
+	"log"
+	 "log"
 	"net/http"
-	"os"*/
+	 "net/http"
+	"os"
 	"path"
 	"path/filepath"
 
-	//"github.com/auth0-community/go-auth0"
+	"github.com/auth0-community/go-auth0"
 	"github.com/gin-gonic/gin"
+	 "gopkg.in/square/go-jose.v2"
+
 	"github.com/SankaKodippily/golang-auth0-example/Go/src/handlers"
 )
 
@@ -31,7 +34,7 @@ func main() {
 		dir, file := path.Split(c.Request.RequestURI)
 		ext := filepath.Ext(file)
 		if file == "" || ext == "" {
-			c.File("./ui/dist/ui/index.html")
+			c.File("./ui/src/index.html")
 		} else {
 			c.File("./ui/dist/ui/" + path.Join(dir, file))
 		}
@@ -67,7 +70,7 @@ func setAuth0Variables() {
 	audience = os.Getenv("https://my-golang-api")
 	domain = os.Getenv("https://rusanka123.auth0.com/")
 }
-/*
+
 // ValidateRequest will verify that a token received from an http request
 // is valid and signy by authority
 func authRequired() gin.HandlerFunc {
@@ -92,4 +95,4 @@ func authRequired() gin.HandlerFunc {
 func terminateWithError(statusCode int, message string, c *gin.Context) {
 	c.JSON(statusCode, gin.H{"error": message})
 	c.Abort()
-}*/
+}

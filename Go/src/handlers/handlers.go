@@ -2,12 +2,11 @@ package handlers
 
 import (
 	"encoding/json"
+	"github.com/SankaKodippily/golang-auth0-example/Go/src/todo"
+	"github.com/gin-gonic/gin"
 	"io"
 	"io/ioutil"
 	"net/http"
-
-	"github.com/SankaKodippily/golang-auth0-example/Go/src/todo"
-	"github.com/gin-gonic/gin"
 )
 
 // GetTodoListHandler returns all current todo items
